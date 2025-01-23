@@ -22,6 +22,18 @@ public class Hangul {
     private static final int latterCount = 588;
 
     public static void main(String[] args) throws Exception {
+        char s1 = '안';
+        char cho1 = choseongOf(s1);
+        char jung1 = jungseongOf(s1);
+        char jong1 = jongseongOf(s1);
+        System.out.printf("%c -> %c %c %c\n", s1, cho1, jung1, jong1);
+        System.out.printf("%c %c %c -> %c\n", cho1, jung1, jong1, syllableFromJamos(cho1, jung1, jong1));
+
+        char s2 = '마';
+        char cho2 = choseongOf(s2);
+        char jung2 = jungseongOf(s2);
+        System.out.printf("%c -> %c %c\n", s2, cho2, jung2);
+        System.out.printf("%c %c -> %c\n", cho2, jung2, syllableFromJamos(cho2, jung2));
     }
 
     public static boolean isSyllable(char ch) {
@@ -79,37 +91,37 @@ public class Hangul {
             case 'ㄳ', 'ᆪ' -> 'ㄳ';
             case 'ㄸ', 'ᄄ' -> 'ㄸ';
             case 'ㅃ', 'ᄈ' -> 'ㅃ';
-            case 'ㅄ', 'ᆹ', -> 'ㅄ';
+            case 'ㅄ', 'ᆹ' -> 'ㅄ';
             case 'ㅉ', 'ᄍ' -> 'ㅉ';
             case 'ㄵ', 'ᆬ' -> 'ㄵ';
             case 'ㄶ', 'ᆭ' -> 'ㄶ';
             case 'ㄺ', 'ᆰ' -> 'ㄺ';
-            case 'ㄻ', 'ᆱ', -> 'ㄻ';
+            case 'ㄻ', 'ᆱ' -> 'ㄻ';
             case 'ㄼ', 'ᆲ' -> 'ㄼ';
-            case 'ㄽ', 'ᆳ', -> 'ㄽ';
-            case 'ㄾ', 'ᆴ', -> 'ㄾ';
-            case 'ㄿ', 'ᆵ', -> 'ㄿ';
-            case 'ㅀ', 'ᆶ', -> 'ㅀ';
+            case 'ㄽ', 'ᆳ' -> 'ㄽ';
+            case 'ㄾ', 'ᆴ' -> 'ㄾ';
+            case 'ㄿ', 'ᆵ' -> 'ㄿ';
+            case 'ㅀ', 'ᆶ' -> 'ㅀ';
 
             case 'ㅏ', 'ᅡ' -> 'ㅏ';
             case 'ㅐ', 'ᅢ' -> 'ㅐ';
             case 'ㅑ', 'ᅣ' -> 'ㅑ';
             case 'ㅒ', 'ᅤ' -> 'ㅐ';
-            case 'ㅓ', 'ᅥ', -> 'ㅓ';
+            case 'ㅓ', 'ᅥ' -> 'ㅓ';
             case 'ㅔ', 'ᅦ' -> 'ㅔ';
             case 'ㅕ', 'ᅧ' -> 'ㅕ';
             case 'ㅖ', 'ᅨ' -> 'ㅔ';
             case 'ㅗ', 'ᅩ' -> 'ㅗ';
-            case 'ㅘ', 'ᅪ', -> 'ㅘ';
+            case 'ㅘ', 'ᅪ' -> 'ㅘ';
             case 'ㅙ', 'ᅫ' -> 'ㅙ';
             case 'ㅚ', 'ᅬ' -> 'ㅚ';
             case 'ㅛ', 'ᅭ' -> 'ㅛ';
-            case 'ㅜ', 'ᅮ', -> 'ㅜ';
+            case 'ㅜ', 'ᅮ' -> 'ㅜ';
             case 'ㅝ', 'ᅯ' -> 'ㅝ';
             case 'ㅞ', 'ᅰ' -> 'ㅞ';
-            case 'ㅟ', 'ᅰ' -> 'ㅟ';
-            case 'ㅠ', 'ᅲ', -> 'ᅲ';
-            case 'ㅡ', 'ᅳ', -> 'ㅡ';
+            case 'ㅟ', 'ᅱ' -> 'ㅟ';
+            case 'ㅠ', 'ᅲ' -> 'ᅲ';
+            case 'ㅡ', 'ᅳ' -> 'ㅡ';
             case 'ㅢ', 'ᅴ' -> 'ㅢ';
             case 'ㅣ', 'ᅵ' -> 'ㅣ';
             
@@ -119,16 +131,18 @@ public class Hangul {
 
     public static char syllableFromJamos(char choseong, char jungseong, char jongseong) throws Exception {
         return (char)(
-                (choseongValue(choseong)) * latterValue
+                (choseongValue(choseong)) * latterCount
                 + (jungseongValue(jungseong)) * jongseongCount
                 + jongseongValue(jongseong)
+                + syllableStart
                 );
     }
 
     public static char syllableFromJamos(char choseong, char jungseong) throws Exception {
         return (char)(
-                (choseongValue(choseong)) * latterValue
+                (choseongValue(choseong)) * latterCount
                 + (jungseongValue(jungseong)) * jongseongCount
+                + syllableStart
                 );
     }
 
