@@ -70,6 +70,18 @@ public class Hangul {
         else return '\0';
     }
 
+    public static char compatibilityChoseongOf(char ch) throws Exception {
+        return toCompatibilityJamo(choseongOf(ch));
+    }
+
+    public static char compatibilityJungseongOf(char ch) throws Exception {
+        return toCompatibilityJamo(jungseongOf(ch));
+    }
+
+    public static char compatibilityJongseongOf(char ch) throws Exception {
+        return toCompatibilityJamo(jongseongOf(ch));
+    }
+
     public static char toCompatibilityJamo(char ch) throws Exception {
         return switch (ch) {
             case 'ㄱ', 'ᄀ', 'ᆨ' -> 'ㄱ';
